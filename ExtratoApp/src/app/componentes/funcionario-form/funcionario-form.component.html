@@ -1,0 +1,116 @@
+<mat-card>
+<h1>{{ btnTitulo}}</h1>
+
+<form [formGroup]="funcionarioForm" (ngSubmit)="submit()" #formDit="ngForm">
+
+  <input type="hidden" formControlName="id">
+
+  <div class="input_box">
+    <mat-form-field>
+      <mat-label for="">Nome :</mat-label>
+      <input matInput type="text" formControlName="nome" placeholder="Insira o nome!" required>
+    </mat-form-field>
+  </div>
+  <div class="input_box">
+    <mat-form-field>
+      <mat-label for="">Sobrenome :</mat-label>
+      <input matInput type="text" formControlName="sobrenome" placeholder="Insira o sobrenome!" required>
+    </mat-form-field>
+    </div>
+
+<div class="input_box">
+  <mat-form-field>
+  <mat-label for="">Departamento :</mat-label>
+  <mat-select id="departamento" formControlName="departamento" required>
+    <mat-option value="RH">RH</mat-option>
+    <mat-option value="Financeiro">Financeiro</mat-option>
+    <mat-option value="Compras">Compras</mat-option>
+    <mat-option value="Atendimento">Atendimento</mat-option>
+    <option value="Zeladoria">Zeladoria</option>
+  </mat-select>
+</mat-form-field>
+</div>
+
+<div class="input_box">
+<mat-form-field>
+  <mat-label for="">Turno :</mat-label>
+  <mat-select id="turno" formControlName="turno" required>
+    <mat-option value="Manha">Manha</mat-option>
+    <mat-option value="Tarde">Tarde</mat-option>
+    <mat-option value="Noite">Noite</mat-option>
+  </mat-select>
+</mat-form-field>
+</div>
+<div class="btn-box">
+  <button type="submit" [disabled]="!funcionarioForm.valid"  mat-raised-button color="accent">{{btnAcao}}</button>
+  <button routerLink=""  mat-raised-button color="basic">Voltar</button>
+</div>
+
+
+</form>
+
+<!--
+<form [formGroup]="funcionarioForm" (ngSubmit)="submit()" #formDit="ngForm">
+
+  <mat-form-field >
+    <mat-label></mat-label>
+  <input matInput type="" formControlName="id">
+  </mat-form-field>
+
+  <mat-form-field >
+    <mat-label>Favorite food</mat-label>
+    <input matInput placeholder="Ex. Pizza" value="Sushi">
+  </mat-form-field>
+
+
+
+
+
+
+
+<div class="input_box">
+  <mat-form-field>
+    <mat-label for="">Nome :</mat-label>
+    <input matInput type="text" formControlName="nome" placeholder="Insira o nome!" required>
+  </mat-form-field>
+</div>
+
+<div class="input_box">
+<mat-form-field>
+  <mat-label for="">Sobrenome :</mat-label>
+  <input matInput type="text" formControlName="sobrenome" placeholder="Insira o sobrenome!" required>
+</mat-form-field>
+</div>
+
+<div class="input_box">
+  <mat-form-field>
+  <mat-label for="">Departamento :</mat-label>
+  <select id="departamento" formControlName="departamento" required>
+    <option value="RH">RH</option>
+    <option value="Financeiro">Financeiro</option>
+    <option value="Compras">Compras</option>
+    <option value="Atendimento">Atendimento</option>
+    <option value="Zeladoria">Zeladoria</option>
+  </select>
+</mat-form-field>
+</div>
+
+
+<div class="input_box">
+<mat-form-field>
+  <mat-label for="">Turno :</mat-label>
+  <select id="turno" formControlName="turno" required>
+    <option value="Manha">Manha</option>
+    <option value="Tarde">Tarde</option>
+    <option value="Noite">Noite</option>
+  </select>
+</mat-form-field>
+</div>
+<div class="btn-box">
+<mat-form-field>
+  <button type="submit" [disabled]="!funcionarioForm.valid"  mat-raised-button color="accent">{{btnAcao}}</button>
+  <button routerLink=""  mat-raised-button color="basic">Voltar</button>
+</mat-form-field>
+</div>
+</form> -->
+</mat-card>
