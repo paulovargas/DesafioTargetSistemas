@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Funcionario } from 'src/app/models/Funcionario';
-import { FuncionarioService } from 'src/app/services/funcionario.service';
+import { Lancamento } from 'src/app/models/Lancamento';
+import { LancamentoService } from 'src/app/services/lancamento.service';
 
 @Component({
   selector: 'app-editar',
@@ -10,21 +10,21 @@ import { FuncionarioService } from 'src/app/services/funcionario.service';
 })
 export class EditarComponent implements OnInit {
   btnAcao: string = 'Editar!'
-  btnTitulo: string = 'Editar Funcionário'
-  funcionario!: Funcionario;
+  btnTitulo: string = 'Editar Lançamento'
+  lancamento!: Lancamento;
 
-  constructor(private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router){}
+  constructor(private lancamentoService: LancamentoService, private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.funcionarioService.GetFuncionario(id).subscribe((data)=> {
-      this.funcionario = data.dados;
+    this.lancamentoService.GetLancamento(id).subscribe((data)=> {
+      this.lancamento = data.dados;
     })
   }
 
-  editarFuncionario(funcionario: Funcionario){
-    this.funcionarioService.EditarFuncionario(funcionario).subscribe((data)=>{
+  editarFuncionario(lancamento: Lancamento){
+    this.lancamentoService.EditarLancamento(lancamento).subscribe((data)=>{
       this.router.navigate(['/'])
     })
   }

@@ -1,8 +1,8 @@
-<div *ngIf="funcionario">
-  <app-funcionario-form [btnAcao]="btnAcao"
+<div *ngIf="lancamento">
+  <app-lancamento-form [btnAcao]="btnAcao"
                         [btnTitulo]="btnTitulo"
-                        [dadosFuncionario]="funcionario"
+                        [dadosLancamento]="lancamento"
                         (onSubmit)="editarFuncionario($event)"
 
-  ></app-funcionario-form>
+  ></app-lancamento-form>
 </div>

@@ -13,10 +13,20 @@
   height: 20px;
 }
 
-.funcionario-box {
+.lancamento-box {
   width: 100%;
   gap: 15px;
   flex-direction: column;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: left;
+  margin-bottom: 2rem;
+}
+
+.filtro-datas{
+  width: 100%;
+  gap: 15px;
+  flex-direction: row;
   display: flex;
   justify-content: space-evenly;
   align-items: left;

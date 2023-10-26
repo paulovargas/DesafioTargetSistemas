@@ -1,7 +1,7 @@
-import { FuncionarioService } from 'src/app/services/funcionario.service';
+import { LancamentoService } from 'src/app/services/lancamento.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Funcionario } from 'src/app/models/Funcionario';
+import { Lancamento } from 'src/app/models/Lancamento';
 
 @Component({
   selector: 'app-detalhes',
@@ -10,25 +10,25 @@ import { Funcionario } from 'src/app/models/Funcionario';
 })
 export class DetalhesComponent implements OnInit {
 
-  funcionario?: Funcionario;
+  lancamento?: Lancamento;
   id!:number;
 
-  constructor(private funcionarioService: FuncionarioService, private route: ActivatedRoute, private router: Router){}
+  constructor(private lancamentoService: LancamentoService, private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.funcionarioService.GetFuncionario(this.id).subscribe((data) => {
+    this.lancamentoService.GetLancamento(this.id).subscribe((data) => {
 
       const dados = data.dados;
 
-      dados.dataDeCriacao = new Date(dados.dataDeCriacao!).toLocaleDateString('pt-BR');
-      dados.dataDeAlteracao = new Date(dados.dataDeAlteracao!).toLocaleDateString('pt-BR');
-      this.funcionario = data.dados;
+      dados.dataLanc = dados.dataLanc;//new Date(dados.dataLanc).toLocaleDateString('pt-BR');
+      console.log("Data: ", dados.dataLanc);
+      this.lancamento = data.dados;
     })
   }
-  InativaFuncionario(){
-    this.funcionarioService.InativaFuncionario(this.id).subscribe((data) => {
+  CancelarLancamento(){
+    this.lancamentoService.CancelarLancamento(this.id).subscribe((data) => {
       this.router.navigate(['/']);
     })
   }

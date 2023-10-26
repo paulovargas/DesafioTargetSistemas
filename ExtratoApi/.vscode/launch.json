@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // Se tiver alterado as estruturas de destino, certifique-se de atualizar o caminho do programa.
-            "program": "${workspaceFolder}/bin/Debug/net6.0/ExtratoApi.dll",
+            "program": "${workspaceFolder}/bin/Debug/net6.0/LancamentoApi.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

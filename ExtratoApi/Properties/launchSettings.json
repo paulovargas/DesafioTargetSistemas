@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "ExtratoApi": {
+    "LancamentoApi": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

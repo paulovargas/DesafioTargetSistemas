@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Funcionario } from 'src/app/models/Funcionario';
-import { FuncionarioService } from 'src/app/services/funcionario.service';
+import { Lancamento } from 'src/app/models/Lancamento';
+import { LancamentoService } from 'src/app/services/lancamento.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -10,15 +10,15 @@ import { FuncionarioService } from 'src/app/services/funcionario.service';
 })
 export class CadastroComponent {
 
-  btnAcao = "Cadastrar Funcionário!"
-  btnTitulo = "Cadastrar Funcionário"
+  btnAcao = "Cadastrar Lançamento!"
+  btnTitulo = "Cadastrar Lançamento"
 
-  constructor(private funcionarioService : FuncionarioService, private router: Router){
+  constructor(private lancamentoService : LancamentoService, private router: Router){
 
   }
 
-  createFuncionario(funcionario: Funcionario){
-    this.funcionarioService.CreateFuncionario(funcionario).subscribe((data) => {
+  createFuncionario(lancamento: Lancamento){
+    this.lancamentoService.CreateLancamento(lancamento).subscribe((data) => {
       this.router.navigate(['/'])
     })
   }

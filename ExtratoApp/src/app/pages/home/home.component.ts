@@ -1,46 +1,50 @@
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Component, OnInit } from '@angular/core';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ExclurComponent } from 'src/app/componentes/exclur/exclur.component';
-import { Funcionario } from 'src/app/models/Funcionario';
-import { FuncionarioService } from 'src/app/services/funcionario.service';
+import { ExcluirComponent } from 'src/app/componentes/excluir/excluir.component';
+import { Lancamento } from 'src/app/models/Lancamento';
+import { LancamentoService } from 'src/app/services/lancamento.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
 
-  funcionarios: Funcionario[] = [];
-  funcionariosGeral: Funcionario[] = [];
+  lancamentos: Lancamento[] = [];
+  lancamentosGeral: Lancamento[] = [];
 
-  colunas = ['Situacao','Nome','Sobrenome','Departamento','Turno', 'Ações','Excluir']
+  colunas = ['Status','Código','Descrição','Data','Valor', 'Ações','Excluir']
 
-  constructor( private funcionarioService: FuncionarioService, public dialog: MatDialog){}
+  constructor( private lancamentoService: LancamentoService, public dialog: MatDialog){ }
 
   ngOnInit(): void {
 
-    this.funcionarioService.GetFuncionarios().subscribe(data => {
+    this.lancamentoService.GetLancamentos().subscribe(data => {
       const dados = data.dados;
       dados.map((item) =>{
-        item.dataDeCriacao = new Date(item.dataDeCriacao!).toLocaleDateString('pt-BR')
-        item.dataDeAlteracao = new Date(item.dataDeAlteracao!).toLocaleDateString('pt-BR')
+        item.dataLanc = item.dataLanc;//new Date(item.dataLanc!).toLocaleDateString('pt-BR')
       })
-      this.funcionarios = data.dados;
-      this.funcionariosGeral = data.dados;
+      console.log("Data :", dados)
+      this.lancamentos = data.dados;
+      this.lancamentosGeral = data.dados;
     })
   }
   search(event: Event){
     const target = event.target as HTMLInputElement;
     const value = target.value.toLocaleLowerCase();
 
-    this.funcionarios = this.funcionariosGeral.filter(funcionario => {
-      return funcionario.nome.toLocaleLowerCase().includes(value);
+    this.lancamentos = this.lancamentosGeral.filter(lancamento => {
+      return lancamento.descricao.toLocaleLowerCase().includes(value);
     })
   }
 
   OpenDialog(id: number){
-      this.dialog.open(ExclurComponent, {
+      this.dialog.open(ExcluirComponent, {
         width: '450px',
         height: '450px',
         data: {
