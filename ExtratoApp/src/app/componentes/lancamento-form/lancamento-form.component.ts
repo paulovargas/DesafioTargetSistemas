@@ -21,10 +21,10 @@ export class LancamentoFormComponent implements OnInit {
     this.lancamentoForm = new FormGroup({
       id: new FormControl(this.dadosLancamento ? this.dadosLancamento.id : 0),
       descricao: new FormControl(this.dadosLancamento ? this.dadosLancamento.descricao : '', [Validators.required]),
-      dataLanc: new FormControl(new Date()),
+      dia: new FormControl(new Date()),
       valor: new FormControl(this.dadosLancamento ? this.dadosLancamento.valor : '', [Validators.required]),
-      avulso: new FormControl(this.dadosLancamento ? this.dadosLancamento.avulso : '', [Validators.required]),
-      status: new FormControl(this.dadosLancamento ? this.dadosLancamento.status : true),
+      avulso: new FormControl(this.dadosLancamento ? this.dadosLancamento.avulso : 'Avulso', [Validators.required]),
+      status: new FormControl(this.dadosLancamento ? this.dadosLancamento.status : 'Valido', [Validators.required]),
     });
   }
   submit(){

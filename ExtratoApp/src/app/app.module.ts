@@ -1,4 +1,4 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +26,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ExcluirComponent } from './componentes/excluir/excluir.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { registerLocaleData } from '@angular/common';
 
+import localePT from '@angular/common/locales/pt';
+
+registerLocaleData(localePT);
 
 @NgModule({
   declarations: [

@@ -23,7 +23,7 @@ export class EditarComponent implements OnInit {
     })
   }
 
-  editarFuncionario(lancamento: Lancamento){
+  editarLancamento(lancamento: Lancamento){
     this.lancamentoService.EditarLancamento(lancamento).subscribe((data)=>{
       this.router.navigate(['/'])
     })

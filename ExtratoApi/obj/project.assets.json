@@ -11643,19 +11643,19 @@
     ]
   },
   "packageFolders": {
-    "/home/paulo/.nuget/packages/": {}
+    "C:\\Users\\paulo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/paulo/projetos/FULLSTACK/DESAFIOTARGETSISTEMAS/ExtratoApi/ExtratoApi.csproj",
+      "projectUniqueName": "C:\\projetos\\FULLSTACK\\DesafioTargetSistemas\\ExtratoApi\\ExtratoApi.csproj",
       "projectName": "ExtratoApi",
-      "projectPath": "/home/paulo/projetos/FULLSTACK/DESAFIOTARGETSISTEMAS/ExtratoApi/ExtratoApi.csproj",
-      "packagesPath": "/home/paulo/.nuget/packages/",
-      "outputPath": "/home/paulo/projetos/FULLSTACK/DESAFIOTARGETSISTEMAS/ExtratoApi/obj/",
+      "projectPath": "C:\\projetos\\FULLSTACK\\DesafioTargetSistemas\\ExtratoApi\\ExtratoApi.csproj",
+      "packagesPath": "C:\\Users\\paulo\\.nuget\\packages\\",
+      "outputPath": "C:\\projetos\\FULLSTACK\\DesafioTargetSistemas\\ExtratoApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/paulo/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\paulo\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -11739,7 +11739,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.416/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.416\\RuntimeIdentifierGraph.json"
       }
     }
   }

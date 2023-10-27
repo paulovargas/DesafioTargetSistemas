@@ -1,8 +1,8 @@
 {
   "Version": 1,
   "Hash": "AJzUHrFfc+Y5XwfFCR4pZBisVF1K9ZSMJD0hyzu4r+Q=",
-  "Source": "LancamentoApi",
-  "BasePath": "_content/LancamentoApi",
+  "Source": "ExtratoApi",
+  "BasePath": "_content/ExtratoApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

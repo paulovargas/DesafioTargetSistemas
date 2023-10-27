@@ -15,10 +15,10 @@ namespace Lancamento.Controllers
             _LancamentoInterface = LancamentoInterface;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<LancamentoModel>>>> GetLancamento()
+        [HttpGet("RangeData")]
+        public async Task<ActionResult<ServiceResponse<List<LancamentoModel>>>> GetLancamento(DateTime inicio, DateTime fim)
         {
-            return Ok( await _LancamentoInterface.GetLancamento());
+            return Ok( await _LancamentoInterface.GetLancamento(inicio, fim));
         }
 
         [HttpGet("{id}")]

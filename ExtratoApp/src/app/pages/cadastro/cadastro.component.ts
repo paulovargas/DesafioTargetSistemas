@@ -17,7 +17,7 @@ export class CadastroComponent {
 
   }
 
-  createFuncionario(lancamento: Lancamento){
+  createLancamento(lancamento: Lancamento){
     this.lancamentoService.CreateLancamento(lancamento).subscribe((data) => {
       this.router.navigate(['/'])
     })

@@ -1,36 +1,14 @@
 <mat-card>
   <div class="lancamento-box">
+    <button routerLink="" mat-raised-button color="">Extrato de conta corrente</button>
     <button routerLink="/cadastro" mat-raised-button color="primary">Cadastrar novo lançamento</button>
-  <!--   <div class="input_box">
-      <mat-form-field>
-        <mat-label>Procurar:</mat-label>
-        <input matInput type="text" placeholder="Qual registro está buscando ?" (input)="search($event)">
-      </mat-form-field>
-    </div> -->
-
-
-
-
-
   </div>
   <div class="filtro-datas">
- <!--    <mat-form-field>
-      <mat-label>Data inicial</mat-label>
-      <input matInput [matDatepicker]="datepicker">
-      <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
-      <mat-datepicker #datepicker>
-        <mat-datepicker-actions>
-          <button mat-button matDatepickerCancel>Cancel</button>
-          <button mat-raised-button color="primary" matDatepickerApply>Definir</button>
-        </mat-datepicker-actions>
-      </mat-datepicker>
-    </mat-form-field> -->
-
     <mat-form-field >
       <mat-label>Filtre por data</mat-label>
       <mat-date-range-input [rangePicker]="rangePicker">
-        <input matStartDate placeholder="Data inicial">
-        <input matEndDate placeholder="Data final">
+        <input matStartDate placeholder="Data inicial" [value]="dayago.value">
+        <input matEndDate placeholder="Data final" [value]="date.value">
       </mat-date-range-input>
       <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
       <mat-date-range-picker #rangePicker>
@@ -46,13 +24,19 @@
     <ng-container matColumnDef="Status">
       <th mat-header-cell *matHeaderCellDef> Status </th>
       <td mat-cell *matCellDef="let lancamento">
-        <div *ngIf="lancamento.status == true; else inativo">
+        <div *ngIf="lancamento.status == 'Valido'; else inativo">
           <button style="border-radius: 100% ;height: 20px; width: 20px; background-color: rgb(26, 229, 26);"></button>
+          Válido
         </div>
         <ng-template #inativo>
           <button style="border-radius: 100% ;height: 20px; width: 20px; background-color: rgb(255, 32, 32);"></button>
+          Cancelado
         </ng-template>
       </td>
+    </ng-container>
+    <ng-container matColumnDef="Tipo">
+      <th mat-header-cell *matHeaderCellDef> Tipo </th>
+      <td mat-cell *matCellDef="let lancamento"> {{lancamento.avulso == 'Avulso' ? 'Automático' : 'Avulso'}} </td>
     </ng-container>
     <ng-container matColumnDef="Código">
       <th mat-header-cell *matHeaderCellDef> Código </th>
@@ -64,7 +48,7 @@
     </ng-container>
     <ng-container matColumnDef="Data">
       <th mat-header-cell *matHeaderCellDef> Data </th>
-      <td mat-cell *matCellDef="let lancamento"> {{lancamento.dataLanc}} </td>
+      <td mat-cell *matCellDef="let lancamento"> {{lancamento.dia | date : 'dd/MM/yyyy HH:mm'}} </td>
     </ng-container>
     <ng-container matColumnDef="Valor">
       <th mat-header-cell *matHeaderCellDef> Valor </th>
@@ -73,14 +57,15 @@
     <ng-container matColumnDef="Ações">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let lancamento">
-        <button routerLink="/editar/{{lancamento.id}}" mat-raised-button color="accent">Editar</button>
-        <button routerLink="/detalhes/{{lancamento.id}}" mat-raised-button>Detalhes</button>
+
       </td>
     </ng-container>
     <ng-container matColumnDef="Excluir">
-      <th mat-header-cell *matHeaderCellDef></th>
+      <th mat-header-cell *matHeaderCellDef> Saldo {{ saldo | currency : 'BRL'}}</th>
       <td mat-cell *matCellDef="let lancamento">
-        <button mat-raised-button color="warn" (click)="OpenDialog(lancamento.id)">Excluir</button>
+        <button routerLink="/editar/{{lancamento.id}}" mat-raised-button color="accent">Editar</button>
+        <button routerLink="/detalhes/{{lancamento.id}}" mat-raised-button>Detalhes</button>
+        <!-- <button mat-raised-button color="warn" (click)="OpenDialog(lancamento.id)">Excluir</button> -->
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="colunas"></tr>

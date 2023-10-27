@@ -7,6 +7,7 @@ import { Lancamento } from 'src/app/models/Lancamento';
 import { LancamentoService } from 'src/app/services/lancamento.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -15,21 +16,37 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class HomeComponent implements OnInit {
 
+  date = new FormControl<Date>(new Date());
+  ontem = new Date(new Date().setHours(-1)).setHours(-1);
+  dayago = new FormControl<Date>(new Date(this.ontem));
+
   lancamentos: Lancamento[] = [];
   lancamentosGeral: Lancamento[] = [];
 
-  colunas = ['Status','Código','Descrição','Data','Valor', 'Ações','Excluir']
+  saldo = 0 as number;
+
+  colunas = ['Status', 'Tipo','Código','Descrição','Data','Valor', 'Ações','Excluir']
 
   constructor( private lancamentoService: LancamentoService, public dialog: MatDialog){ }
 
   ngOnInit(): void {
 
-    this.lancamentoService.GetLancamentos().subscribe(data => {
+    console.log("Dia anterior: ", this.dayago.value?.toJSON().substring(0, 10));
+    console.log("Hoje: ", this.date.value?.toJSON().substring(0, 10));
+
+    const inicio = this.dayago.value?.toJSON().substring(0, 10);
+    const fim = this.date.value?.toJSON().substring(0, 10);
+
+    this.lancamentoService.GetLancamentos(`RangeData?inicio=${inicio}&fim=${fim}`).subscribe(data => {
       const dados = data.dados;
       dados.map((item) =>{
-        item.dataLanc = item.dataLanc;//new Date(item.dataLanc!).toLocaleDateString('pt-BR')
+        if (item.status != 'Cancelado') {
+          var stringNumber = item.valor;
+        var saldo = +stringNumber;
+        this.saldo = this.saldo + saldo;
+        }
+        item.valor = new Number(item.valor).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
       })
-      console.log("Data :", dados)
       this.lancamentos = data.dados;
       this.lancamentosGeral = data.dados;
     })

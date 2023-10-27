@@ -21,9 +21,8 @@ export class DetalhesComponent implements OnInit {
     this.lancamentoService.GetLancamento(this.id).subscribe((data) => {
 
       const dados = data.dados;
-
-      dados.dataLanc = dados.dataLanc;//new Date(dados.dataLanc).toLocaleDateString('pt-BR');
-      console.log("Data: ", dados.dataLanc);
+      dados.valor = new Number(dados.valor).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+      dados.dia = dados.dia;
       this.lancamento = data.dados;
     })
   }

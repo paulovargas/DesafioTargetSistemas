@@ -12,13 +12,13 @@
     <div class="input_box">
       <mat-form-field>
         <mat-label>Status:</mat-label>
-        <input matInput type="text" value="{{lancamento?.status == 'Cancelado' ? 'Válido' : 'Cancelado'}}" disabled>
+        <input matInput type="text" value="{{lancamento?.status == 'Valido' ? 'Válido' : 'Cancelado'}}" disabled>
       </mat-form-field>
       </div>
     <div class="input_box">
       <mat-form-field>
         <mat-label>Tipo:</mat-label>
-        <input matInput type="text" value="{{lancamento?.avulso == 'Avulso' ? 'Automático' : 'Avulso'}}" disabled>
+        <input matInput type="text" value="{{lancamento?.avulso == 'Avulso' ? 'Avulso' : 'Automático'}}" disabled>
       </mat-form-field>
       </div>
     <div class="input_box">
@@ -30,36 +30,15 @@
     <div class="input_box">
     <mat-form-field>
       <mat-label>Valor:</mat-label>
-      <input matInput type="text" value="R$ {{lancamento?.valor}}" disabled>
+      <input matInput type="text" value="{{lancamento?.valor}}" disabled>
       </mat-form-field>
     </div>
-<!--     <div class="input_box">
-    <mat-form-field>
-      <mat-label>Departamento:</mat-label>
-      <input matInput type="text" value="{{lancamento?.departamento}}" disabled>
-    </mat-form-field>
-    </div> -->
-    <!-- <div class="input_box">
-    <mat-form-field>
-      <mat-label>Situação:</mat-label>
-      <input matInput type="text" value="{{lancamento?.status == true ? 'Ativo' : 'Inativo'}}" disabled>
-    </mat-form-field>
-    </div>
-     -->
     <div class="input_box">
     <mat-form-field>
       <mat-label>Data de lançamento:</mat-label>
-      <input matInput type="text" value="{{lancamento?.dataLanc}}" disabled>
+      <input matInput type="text" value="{{lancamento?.dia | date : 'dd/MM/yyyy HH:mm'}}" disabled>
     </mat-form-field>
     </div>
-
-    <!-- <div class="input_box">
-    <mat-form-field>
-      <mat-label>Data de Alteração:</mat-label>
-      <input matInput type="text" value="{{lancamento?.dataDeAlteracao}}" disabled>
-    </mat-form-field>
-    </div>
- -->
     <div class="btn-box">
       <button (click)="CancelarLancamento()" mat-raised-button color="warn" >Cancelar Lancamento</button>
       <button routerLink="" mat-raised-button>Voltar</button>

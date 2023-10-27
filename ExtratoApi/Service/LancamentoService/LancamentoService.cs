@@ -108,13 +108,15 @@ namespace LancamentoApi.Service.Lancamentoervice
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<LancamentoModel>>> GetLancamento()
+        public async Task<ServiceResponse<List<LancamentoModel>>> GetLancamento(DateTime inicio, DateTime fim)
         {
             ServiceResponse<List<LancamentoModel>> serviceResponse = new ServiceResponse<List<LancamentoModel>>();
 
             try
             {
-                serviceResponse.Dados = _context.Lancamento.ToList();
+                serviceResponse.Dados = _context.Lancamento
+                .Where( x => x.dia.Date >= inicio && x.dia.Date <= fim)
+                .ToList();
 
                 if(serviceResponse.Dados.Count == 0)
                 {

@@ -1,8 +1,8 @@
 export interface Lancamento{
   id?: number;
   descricao: string;
-  dataLanc: string;
-  valor: number;
-  avulso?: string;
-  status?: string;
+  dia: string;
+  valor: string;
+  avulso: string;
+  status: string;
 }

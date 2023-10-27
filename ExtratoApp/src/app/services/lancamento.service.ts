@@ -14,8 +14,8 @@ export class LancamentoService {
 
   constructor( private http: HttpClient ) { }
 
-  GetLancamentos() : Observable<Response<Lancamento[]>>{
-    return this.http.get<Response<Lancamento[]>>(this.apiUrl);
+  GetLancamentos(date: string) : Observable<Response<Lancamento[]>>{
+    return this.http.get<Response<Lancamento[]>>(`${this.apiUrl}/${date}`);
   }
   GetLancamento(id: number) : Observable<Response<Lancamento>>{
     return this.http.get<Response<Lancamento>>(`${this.apiUrl}/${id}`);

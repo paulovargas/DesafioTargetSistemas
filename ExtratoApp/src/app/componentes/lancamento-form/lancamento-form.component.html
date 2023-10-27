@@ -7,42 +7,31 @@
 
   <div class="input_box">
     <mat-form-field>
-      <mat-label for="">Nome :</mat-label>
-      <input matInput type="text" formControlName="nome" placeholder="Insira o nome!" required>
+      <mat-label for="">Descrição :</mat-label>
+      <input matInput type="text" formControlName="descricao" placeholder="Lançamento de ...">
     </mat-form-field>
   </div>
+
+      <input type="hidden" formControlName="status" value="Valido">
+
+      <input type="hidden" formControlName="avulso" value="Avulso">
+
+  <mat-form-field>
+    <mat-label>Data</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dia">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
   <div class="input_box">
     <mat-form-field>
-      <mat-label for="">Sobrenome :</mat-label>
-      <input matInput type="text" formControlName="sobrenome" placeholder="Insira o sobrenome!" required>
+      <mat-label for="">Valor :</mat-label>
+      <input matInput type="number" formControlName="valor" placeholder="R$" required>
     </mat-form-field>
-    </div>
+  </div>
 
-<div class="input_box">
-  <mat-form-field>
-  <mat-label for="">Departamento :</mat-label>
-  <mat-select id="departamento" formControlName="departamento" required>
-    <mat-option value="RH">RH</mat-option>
-    <mat-option value="Financeiro">Financeiro</mat-option>
-    <mat-option value="Compras">Compras</mat-option>
-    <mat-option value="Atendimento">Atendimento</mat-option>
-    <option value="Zeladoria">Zeladoria</option>
-  </mat-select>
-</mat-form-field>
-</div>
-
-<div class="input_box">
-<mat-form-field>
-  <mat-label for="">Turno :</mat-label>
-  <mat-select id="turno" formControlName="turno" required>
-    <mat-option value="Manha">Manha</mat-option>
-    <mat-option value="Tarde">Tarde</mat-option>
-    <mat-option value="Noite">Noite</mat-option>
-  </mat-select>
-</mat-form-field>
-</div>
 <div class="btn-box">
-  <button type="submit" [disabled]="!lancamentoForm.valid"  mat-raised-button color="accent">{{btnAcao}}</button>
+  <button type="submit"  mat-raised-button color="accent">{{btnAcao}}</button>
   <button routerLink=""  mat-raised-button color="basic">Voltar</button>
 </div>
 
