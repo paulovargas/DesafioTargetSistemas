@@ -1,13 +1,10 @@
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { Component, OnInit } from '@angular/core';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ExcluirComponent } from 'src/app/componentes/excluir/excluir.component';
 import { Lancamento } from 'src/app/models/Lancamento';
 import { LancamentoService } from 'src/app/services/lancamento.service';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { subDays } from 'date-fns';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +14,7 @@ import { FormControl } from '@angular/forms';
 export class HomeComponent implements OnInit {
 
   date = new FormControl<Date>(new Date());
-  ontem = new Date(new Date().setHours(-1)).setHours(-1);
-  dayago = new FormControl<Date>(new Date(this.ontem));
+  dayago = new FormControl(subDays(new Date(), 2));
 
   lancamentos: Lancamento[] = [];
   lancamentosGeral: Lancamento[] = [];
@@ -27,15 +23,26 @@ export class HomeComponent implements OnInit {
 
   colunas = ['Status', 'Tipo','Código','Descrição','Data','Valor', 'Ações','Excluir']
 
-  constructor( private lancamentoService: LancamentoService, public dialog: MatDialog){ }
+  myGroup: FormGroup;
+
+  constructor( private lancamentoService: LancamentoService, public dialog: MatDialog){
+    this.myGroup = new FormGroup({
+      date: this.date,
+      dayago: this.dayago,
+
+      })
+   }
 
   ngOnInit(): void {
+    this.onDateRangeApply();
+  }
 
-    console.log("Dia anterior: ", this.dayago.value?.toJSON().substring(0, 10));
-    console.log("Hoje: ", this.date.value?.toJSON().substring(0, 10));
+  onLoadGrid(){
 
-    const inicio = this.dayago.value?.toJSON().substring(0, 10);
-    const fim = this.date.value?.toJSON().substring(0, 10);
+    this.saldo = 0;
+
+    const inicio = this.dayago;
+    const fim = this.date;
 
     this.lancamentoService.GetLancamentos(`RangeData?inicio=${inicio}&fim=${fim}`).subscribe(data => {
       const dados = data.dados;
@@ -51,13 +58,11 @@ export class HomeComponent implements OnInit {
       this.lancamentosGeral = data.dados;
     })
   }
-  search(event: Event){
-    const target = event.target as HTMLInputElement;
-    const value = target.value.toLocaleLowerCase();
 
-    this.lancamentos = this.lancamentosGeral.filter(lancamento => {
-      return lancamento.descricao.toLocaleLowerCase().includes(value);
-    })
+  onDateRangeApply() {
+    this.dayago = this.myGroup.get('dayago')?.value.toJSON().substring(0, 10);
+    this.date = this.myGroup.get('date')?.value.toJSON().substring(0, 10);
+    this.onLoadGrid();
   }
 
   OpenDialog(id: number){
