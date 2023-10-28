@@ -28,7 +28,6 @@ export class DetalhesComponent implements OnInit {
   }
   CancelarLancamento(){
     this.lancamentoService.CancelarLancamento(this.id).subscribe((data) => {
-      console.log("Data :", data);
       this.router.navigate(['/']);
     })
   }

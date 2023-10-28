@@ -1,7 +1,8 @@
 <mat-card>
 <h1>{{ btnTitulo}}</h1>
-<div *ngIf="dadosLancamento?.status" aria-readonly="true">
+<div *ngIf="dadosLancamento?.avulso == 'Avulso'" aria-readonly="true">
 
+  <h1>Edita</h1>
 
 </div>
 
@@ -12,7 +13,7 @@
   <div class="input_box">
     <mat-form-field>
       <mat-label for="">Descrição :</mat-label>
-      <input matInput type="text" formControlName="descricao" placeholder="Lançamento de ..." readonly>
+      <input matInput type="text" formControlName="descricao" placeholder="Lançamento de ..." [readonly]="dadosLancamento?.status == 'Valido' && dadosLancamento?.avulso == 'Avulso' || dadosLancamento?.avulso == 'NaoAvulso' ? true : false">
     </mat-form-field>
   </div>
 
@@ -30,12 +31,12 @@
   <div class="input_box" >
     <mat-form-field>
       <mat-label for="">Valor :</mat-label>
-      <input matInput type="number" formControlName="valor" placeholder="R$" required>
+      <input matInput type="number" formControlName="valor" placeholder="R$">
     </mat-form-field>
   </div>
 
 <div class="btn-box">
-  <button type="submit"  mat-raised-button color="accent" *ngIf="!dadosLancamento?.status" readonly>{{btnAcao}}</button>
+  <button type="submit"  mat-raised-button color="accent" *ngIf="dadosLancamento?.status == 'Valido' && dadosLancamento?.avulso == 'Avulso' || btnAcao === 'Cadastrar Lançamento!'">{{btnAcao}}</button>
   <button routerLink=""  mat-raised-button color="basic">Voltar</button>
 </div>
 

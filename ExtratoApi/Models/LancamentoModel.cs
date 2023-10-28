@@ -8,8 +8,6 @@ namespace LancamentoApi.Models
 {
     public class LancamentoModel
     {
-        // campos : Id, descrição, data, valor, avulso, status.
-
         public int Id { get; set; }
         public string? descricao { get; set; }
         public DateTime dia { get; set; }

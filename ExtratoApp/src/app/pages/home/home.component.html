@@ -64,9 +64,8 @@
     <ng-container matColumnDef="Excluir">
       <th mat-header-cell *matHeaderCellDef> Saldo {{ saldo | currency : 'BRL'}}</th>
       <td mat-cell *matCellDef="let lancamento">
-        <button routerLink="/editar/{{lancamento.id}}" mat-raised-button color="accent">Editar</button>
+        <button routerLink="/editar/{{lancamento.id}}" mat-raised-button color="accent" *ngIf="lancamento?.status == 'Valido' && lancamento?.avulso == 'Avulso'">Editar</button>
         <button routerLink="/detalhes/{{lancamento.id}}" mat-raised-button>Detalhes</button>
-        <!-- <button mat-raised-button color="warn" (click)="OpenDialog(lancamento.id)">Excluir</button> -->
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="colunas"></tr>

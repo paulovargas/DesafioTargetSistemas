@@ -175,7 +175,7 @@ namespace LancamentoApi.Service.Lancamentoervice
                 if(Lancamento == null)
                 {
                     serviceResponse.Dados = null;
-                    serviceResponse.Mensagem = "Usuário não localizado!";
+                    serviceResponse.Mensagem = "Lançamento não localizado!";
                     serviceResponse.Sucesso = false;
                 }
 
@@ -207,12 +207,9 @@ namespace LancamentoApi.Service.Lancamentoervice
                 if (Lancamento == null)
                 {
                     serviceResponse.Dados = null;
-                    serviceResponse.Mensagem = "Usuário não localizado!";
+                    serviceResponse.Mensagem = "Lançamento não localizado!";
                     serviceResponse.Sucesso = false;
                 }
-
-
-                /* Lancamento.DataDeAlteracao = DateTime.Now.ToLocalTime(); */
 
                 _context.Lancamento.Update(editadoLancamento);
                 await _context.SaveChangesAsync();
