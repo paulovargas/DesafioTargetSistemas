@@ -28,7 +28,7 @@ export class LancamentoService {
   }
 
   CancelarLancamento(id: number) : Observable<Response<Lancamento[]>>{
-    return this.http.put<Response<Lancamento[]>>(`${this.apiUrl}/CancelarLancamento/${id}`, id);
+    return this.http.put<Response<Lancamento[]>>(`${this.apiUrl}/cancelaLancamento?id=${id}`, id);
   }
 
   ExcluirLancamento(id: number) : Observable<Response<Lancamento[]>>{

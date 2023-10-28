@@ -28,8 +28,37 @@ namespace LancamentoApi.Service.Lancamentoervice
                     return serviceResponse;
                 }
 
-                /* novoLancamento.DataDeCriacao = DateTime.Now.ToLocalTime();
-                novoLancamento.DataDeAlteracao = DateTime.Now.ToLocalTime(); */
+                _context.Add(novoLancamento);
+                await _context.SaveChangesAsync();
+
+                serviceResponse.Dados = _context.Lancamento.ToList();
+
+
+            }catch (Exception ex)
+            {
+                serviceResponse.Mensagem = ex.Message;
+                serviceResponse.Sucesso = false;
+            }
+
+            return serviceResponse;
+        }
+        public async Task<ServiceResponse<List<LancamentoModel>>> CreateLancamentoNaoAvulso(LancamentoModel novoLancamento)
+        {
+            ServiceResponse<List<LancamentoModel>> serviceResponse = new ServiceResponse<List<LancamentoModel>>();
+
+            try
+            {
+                if(novoLancamento == null)
+                {
+                    serviceResponse.Dados = null;
+                    serviceResponse.Mensagem = "Informar dados!";
+                    serviceResponse.Sucesso = false;
+
+                    return serviceResponse;
+                }
+
+                novoLancamento.avulso = Enums.EnumTipoLan.NaoAvulso;
+                novoLancamento.status = Enums.EnumStatusLancamento.Valido;
 
                 _context.Add(novoLancamento);
                 await _context.SaveChangesAsync();
@@ -135,7 +164,7 @@ namespace LancamentoApi.Service.Lancamentoervice
 
         }
 
-        public async Task<ServiceResponse<List<LancamentoModel>>> InativaLancamento(int id)
+        public async Task<ServiceResponse<List<LancamentoModel>>> cancelaLancamento(int id)
         {
             ServiceResponse<List<LancamentoModel>> serviceResponse = new ServiceResponse<List<LancamentoModel>>();
 
@@ -150,8 +179,7 @@ namespace LancamentoApi.Service.Lancamentoervice
                     serviceResponse.Sucesso = false;
                 }
 
-                /* Lancamento.Ativo = false;
-                Lancamento.DataDeAlteracao = DateTime.Now.ToLocalTime(); */
+                Lancamento.status = Enums.EnumStatusLancamento.Cancelado;
 
                 _context.Lancamento.Update(Lancamento);
                 await _context.SaveChangesAsync();

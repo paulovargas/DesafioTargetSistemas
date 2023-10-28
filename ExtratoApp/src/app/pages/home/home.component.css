@@ -32,3 +32,6 @@
   align-items: left;
   margin-bottom: 2rem;
 }
+.valor-negativo {
+  color: red;
+}

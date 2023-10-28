@@ -34,6 +34,11 @@ namespace Lancamento.Controllers
         {
             return Ok(await _LancamentoInterface.CreateLancamento(novoLancamento));
         }
+        [HttpPost("NaoAvulso")]
+        public async Task<ActionResult<ServiceResponse<List<LancamentoModel>>>> CreateLancamentoNaoAvulso(LancamentoModel novoLancamento)
+        {
+            return Ok(await _LancamentoInterface.CreateLancamentoNaoAvulso(novoLancamento));
+        }
 
         [HttpPut]
         public async Task<ActionResult<ServiceResponse<List<LancamentoModel>>>> UpdateLancamento(LancamentoModel editadoLancamento)
@@ -44,10 +49,10 @@ namespace Lancamento.Controllers
         }
 
 
-        [HttpPut("inativaLancamento")]
-        public async Task<ActionResult<ServiceResponse<List<LancamentoModel>>>> InativaLancamento(int id)
+        [HttpPut("cancelaLancamento")]
+        public async Task<ActionResult<ServiceResponse<List<LancamentoModel>>>> cancelaLancamento(int id)
         {
-            ServiceResponse<List<LancamentoModel>> serviceResponse = await _LancamentoInterface.InativaLancamento(id);
+            ServiceResponse<List<LancamentoModel>> serviceResponse = await _LancamentoInterface.cancelaLancamento(id);
 
             return Ok(serviceResponse);
 
