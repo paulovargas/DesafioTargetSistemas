@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   colunas = ['Status', 'Tipo','Código','Descrição','Data','Valor', 'Ações','Excluir']
 
   myGroup: FormGroup;
+  Math: any;
 
   constructor( private lancamentoService: LancamentoService, public dialog: MatDialog){
     this.myGroup = new FormGroup({
@@ -52,7 +53,7 @@ export class HomeComponent implements OnInit {
         var saldo = +stringNumber;
         this.saldo = this.saldo + saldo;
         }
-        item.valor = new Number(item.valor).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+        //item.valor = new Number(item.valor).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
       })
       this.lancamentos = data.dados;
       this.lancamentosGeral = data.dados;

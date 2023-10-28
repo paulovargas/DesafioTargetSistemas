@@ -1,10 +1,5 @@
 <mat-card>
-<h1>{{ btnTitulo}}</h1>
-<div *ngIf="dadosLancamento?.avulso == 'Avulso'" aria-readonly="true">
-
-  <h1>Edita</h1>
-
-</div>
+<h1 style="color: aliceblue;">{{ btnTitulo}}</h1>
 
 <form [formGroup]="lancamentoForm" (ngSubmit)="submit()" #formDit="ngForm">
 
