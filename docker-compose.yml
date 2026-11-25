@@ -1,0 +1,44 @@
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-LocalDev_Only!ChangeMe2026}
+    ports:
+      - "${MSSQL_PORT:-1433}:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P "$${MSSQL_SA_PASSWORD}" -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 30s
+
+  api:
+    build:
+      context: ./ExtratoApi
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Server=database,1433;Database=ExtratoApi;User Id=sa;Password=${MSSQL_SA_PASSWORD:-LocalDev_Only!ChangeMe2026};Encrypt=False;TrustServerCertificate=True"
+    ports:
+      - "${API_PORT:-8081}:8080"
+    depends_on:
+      database:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ./ExtratoApp
+      dockerfile: Dockerfile
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      - api
+
+volumes:
+  sqlserver_data:

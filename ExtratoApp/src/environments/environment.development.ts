@@ -1,3 +1,4 @@
 export const environment = {
-  ApiUrl: "https://localhost:7212/api"
+  // Nginx proxies /api to the API container in the Docker Compose setup.
+  ApiUrl: "/api"
 };

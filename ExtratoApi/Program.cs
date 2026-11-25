@@ -6,8 +6,6 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -26,6 +24,25 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Apply the checked-in schema when the container starts, after the database is ready.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var retries = 0;
+    while (true)
+    {
+        try
+        {
+            await db.Database.MigrateAsync();
+            break;
+        }
+        catch when (++retries < 12)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(5));
+        }
+    }
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -33,8 +50,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("ExtratoApp");
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
